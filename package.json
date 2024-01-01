@@ -1,0 +1,17 @@
+{
+  "name": "node-db",
+  "version": "1.0.0",
+  "description": "Some different ways to access a mysql | mariadb database.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "andsju",
+  "license": "ISC",
+  "dependencies": {
+    "mariadb": "^3.2.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.6.5"
+  }
+}
