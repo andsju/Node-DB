@@ -3,13 +3,17 @@ const mysql = require('mysql');
 const mysql2 = require('mysql2');
 const mariadb = require('mariadb');
 
-const port = 8080;
+const port = 40201;
 
-let db_access = {
-    host: 'localhost',
-    user: 'root',
-    password: 'secret'
+let db_access = {};
+
+db_access = {
+    host: 'dbs.storiesaround.com',
+    user: 'xnpp_user_dbs',
+    password: 'P@ssw0rd',
+    database: 'xnpp_dbs'
 };
+
 
 const server = http.createServer((req, res) => {
 
@@ -62,6 +66,7 @@ const server = http.createServer((req, res) => {
                     res.write(`${JSON.stringify(fields)}`);
                     res.end();
                 }
+                connection.end();
             });
 
             break;
@@ -81,6 +86,7 @@ const server = http.createServer((req, res) => {
                     res.write(`${JSON.stringify(fields)}`);
                     res.end();
                 }
+                pool.end();
             });
 
             break;
@@ -109,6 +115,7 @@ const server = http.createServer((req, res) => {
                         .finally(() => {
                             res.end();
                             conn.end();
+                            pool.end();
                         })
 
                 }).catch(error => {
@@ -164,6 +171,7 @@ async function asyncAwaitMariaDB(req, res) {
         res.write(`result: ${JSON.stringify(error)}`);
     } finally {
         res.end();
+        pool.end();
         if (conn) { conn.end() };
     }
 }
@@ -181,5 +189,6 @@ async function asyncAwaitMySQL2(req, res) {
         res.write(`error: ${JSON.stringify(error)}`);
     } finally {
         res.end();
+        pool.end();
     };
 }
